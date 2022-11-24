@@ -1,0 +1,18 @@
+#login-page {
+  background: var(--grey-200);
+
+  .form {
+    .register-links {
+      // background: red;
+      display: flex !important;
+      justify-content: space-between;
+      a {
+        text-decoration: underline;
+      }
+    }
+
+    .btn-block {
+      margin-bottom: 1rem;
+    }
+  }
+}

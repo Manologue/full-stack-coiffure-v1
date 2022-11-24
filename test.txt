@@ -1,0 +1,62 @@
+ <button data-service_id="<?= html_escape($service['id']) ?>" data-user_id="<?= html_escape($user['id']) ?>" id="add-btn" class="btn cart-btn">add</button>
+
+
+// $request_body = file_get_contents('php://input');
+ // $data = (array)json_decode($request_body);
+
+ // $user_id = $data['userId'];
+ // $service_id = $data['service_id'];
+
+ // echo $user_id;
+ // echo $service_id;
+
+
+
+
+
+
+ /**********************************/
+     <?php
+      
+      foreach ($cart_session as $service) {  ?>
+       <div class="info" data-service_id=<?= html_escape($service['service_id']) ?> data-user_id=<?= html_escape($service['user_id']) ?>>
+        <div class="details">
+         <p><?= html_escape($service['service_title']) ?></p>
+         <span>x<?= html_escape($service['quantity']) ?></span>
+        </div>
+        <span class="price"><?= html_escape($service['service_price']) ?>$ <i class="fa-solid fa-square-xmark"></i></span>
+       </div>
+      <?php }
+     } else { ?>
+      <div class="info empty">
+       <p>veillez ajouter les services offers par ce coiffeur</p>
+      </div>
+     <?php  } ?>
+
+/*************************************/
+
+
+  <!--********** ajax  **********-->
+     <!-- <?php if (!empty($_SESSION["user_$id"])) {
+           foreach ($_SESSION["user_$id"] as $service) { ?>
+       <div class='info' data-service_id="<?= html_escape($service['service_id']) ?>" data-user_id=<?= html_escape($service['user_id']) ?>>
+        <div class='details'>
+         <p><?= html_escape($service['service_title']) ?></p>
+         <span>x<?= html_escape($service['quantity']) ?></span>
+        </div>
+        <span class='price'><?= html_escape($service['service_price']) ?>$ <i class='fa-solid fa-square-xmark'></i></span>
+       </div>
+      <?php  }
+          } else { ?>
+      <div class='info empty'>
+       <p>veillez ajouter les services offers par ce coiffeur</p>
+      </div>
+     <?php } ?> -->
+
+
+
+      // $count = count($_SESSION["user_$user_id"]);
+    // $_SESSION["user_$user_id"]['count'] = $count;
+
+
+

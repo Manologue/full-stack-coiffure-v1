@@ -1,0 +1,10 @@
+{
+  "require": {
+    "ezyang/htmlpurifier": "^4.16"
+  },
+  "autoload": {
+    "psr-4": {
+      "StylistCommerce\\": "src/classes/"
+    }
+  }
+}
