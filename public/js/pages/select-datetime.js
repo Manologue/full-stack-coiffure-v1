@@ -7,10 +7,20 @@ const selectedTime = document.querySelector('#selected-time')
 const picker = document.querySelector('#picker')
 
 const dangerAlert = document.querySelector('.modal-overlay#modal-danger')
+const cartContainer = document.querySelector('.services-container')
 
 const headerAlert = document.querySelector('.modal-overlay#modal-danger header > span')
 const headerContent = document.querySelector('.modal-overlay#modal-danger .content')
 const closeBtnAlert = document.querySelector('.modal-overlay#modal-danger .close')
+const calendarForm = document.querySelector('.calendar-container form')
+const modalSuccess = document.querySelector('#modal-success')
+let slashes = ''
+
+if (window.location.toString().includes('cart')) {
+  slashes = '../../../../'
+} else {
+  slashes = '../../'
+}
 
 // if (selectedDate.value !== undefined && selectedTime.value !== undefined) {
 //   console.log('you entered something my brother')
@@ -18,7 +28,7 @@ const closeBtnAlert = document.querySelector('.modal-overlay#modal-danger .close
 //   console.log('empty my brother')
 // }
 if (picker) {
-  picker.addEventListener('click', (e) => {
+  picker.addEventListener('click', async (e) => {
     if (e.target && e.target.matches('#picker .myc-available-time')) {
       let time = e.target.dataset.time
       let date = e.target.dataset.date
@@ -35,6 +45,28 @@ if (picker) {
        Ce temps est déjà obscellete veuillez choisir un autre.
    </p>`
         return
+      }
+      let valid_date = `${date} ${time}`
+      // console.log(valid_date)
+      sessionStorage.setItem('valid_date', valid_date)
+      let user_id = cartContainer.dataset.user_id
+
+      let data = await fetch(
+        `${slashes}src/pages/ajax/date-time.php?valid_date_time=${valid_date}&id=${user_id}`,
+        {
+          method: 'GET',
+        }
+      )
+      try {
+        const response = await data.text()
+        console.log(response)
+        if (response === 'true') {
+          console.log('good response')
+          modalSuccess.style.display = 'block'
+          calendarForm.submit()
+        }
+      } catch (error) {
+        console.log(error)
       }
     }
   })

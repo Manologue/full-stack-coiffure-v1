@@ -1,10 +1,10 @@
-// let calendar = flatpickr('#search-day', {
-//   altInput: true,
-//   altFormat: 'F j, Y',
-//   dateFormat: 'Y-m-d',
-//   minDate: 'today',
-//   locale: 'de', // locale for this instance only
-// })
+let calendar = flatpickr('#search-day', {
+  altInput: true,
+  altFormat: 'F j, Y',
+  dateFormat: 'Y-m-d',
+  minDate: 'today',
+  locale: 'de', // locale for this instance only
+})
 
 const inputLocation = document.querySelector('#location-input'),
   inputServices = document.querySelector('#services-input'),
@@ -173,7 +173,7 @@ if (modalOverlay) {
     })
 
     const checkLocation = async (chosenLocation, user_id, _slashes) => {
-      // console.log(chosenLocation, user_id)
+      console.log(chosenLocation)
       if (window.location.toString().includes('cart')) {
         slashes = '../../../../'
       } else {
@@ -188,7 +188,7 @@ if (modalOverlay) {
 
       let response = await data.text()
 
-      // console.log(response)
+      console.log(response)
       // console.log(response)
       if (response === 'false') {
         console.log('not in your city bro !!!')
@@ -224,8 +224,6 @@ if (modalOverlay) {
           checkLocation(location, user_id)
         }
       }
-
-      console.log(chosenLocation)
     })
   }
   // on submit cart in stylist page

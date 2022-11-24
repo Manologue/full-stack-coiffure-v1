@@ -40,17 +40,19 @@
 
     </div>
    </div>
-   <!-- <div class="date-time">
-    <div class="head">
-     <span><i class="fa-solid fa-location-dot"></i> Date & heure</span>
+   <?php if ($cart_page !== 'stylist') {
+   ?>
+    <div class="date-time">
+     <div class="head">
+      <span><i class="fa-regular fa-clock"></i> Date & heure</span>
+     </div>
+     <div class="info">
+      <p>
+       <?= $_SESSION["valid_date_time_{$user['id']}"] ? $format_date . ' a ' . $format_time . ' h ' : "" ?>
+      </p>
+     </div>
     </div>
-    <div class="info">
-     <p>
-      Hartsfield-Jackson Atlanta International Airport, 6000 N Terminal
-      Pkwy, Atlanta, GA 30320, United States
-     </p>
-    </div>
-   </div> -->
+   <?php } ?>
   </div>
   <!-- handle with javascript in modals.js check the if cartForm condition -->
   <?php if ($cart_page === "stylist") { ?>

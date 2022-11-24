@@ -1,5 +1,7 @@
 <?php
 
+
+
 declare(strict_types=1);                                 // Use strict types
 
 
@@ -21,36 +23,33 @@ if (!$user) {                                          // If user is empty
 $id = $user['id'];   // user id
 
 
-// $user_days = User::action()->get_date_time($id);
+if (isset($_POST['valid'])) {                         // check that it was validated by cart form before continuing
+ $_SESSION["valid_cart_user_{$user['id']}"] = true;
+ // echo 'valid';
+}
+
 
 // echo '<pre>';
 // var_dump($_SESSION);
 // echo '</pre>';
-
 // die;
-
-
-if (isset($_POST['valid'])) {                         // check that it was validated by cart form before continuing
- $_SESSION["valid_cart_user_{$user['id']}"] = true;
-}
 
 $is_valid_location = $_SESSION["chosenLocation_{$user['id']}"] ?? "invalid";  // check if cart location is valid
 
-if (!isset($_SESSION["valid_cart_user_{$user['id']}"]) ||  $is_valid_location !== 'valid') { // if never validated or session expired redirect back to user stylist page 
- header('Location: ' . DOC_ROOT . 'stylist/' . $identifier);
+$is_valid_datetime = $_SESSION["valid_date_time_{$user['id']}"] ?? "invalid"; // check if date has been validated and if date is present in the session
+
+
+
+if (!isset($_SESSION["valid_cart_user_{$user['id']}"]) ||  $is_valid_location !== 'valid' || $is_valid_datetime == "invalid") { // if never validated or session expired redirect back to user stylist page 
+ header('Location: ' . DOC_ROOT . 'stylist/' . $identifier . '/cart' . '/select-datetime');
  die;
 }
 
-if (isset($_SESSION["valid_date_time_{$user['id']}"])) { // if date has already been validated
+$date = new \DateTime($is_valid_datetime);
 
- $is_valid_datetime = $_SESSION["valid_date_time_{$user['id']}"];
 
- $date = new \DateTime($is_valid_datetime);
-
- $format_date = $date->format('l, jS M Y');
- $format_time = $date->format('H:i:');
-}
-
+$format_date = $date->format('l, jS M Y');
+$format_time = $date->format('H:i');
 
 
 
@@ -74,12 +73,11 @@ if (!empty($services) || count($services) !== 0) {
    $categories[$category_title][] = $service;
   }
  }
- $cart_page = "datetime";
+ $cart_page = "authenticate";
 } else {
  echo "<h1>you have no services to offer bro !!!!</h1>";
  die;
 }
 
 
-
-include APP_ROOT . '/templates/select-datetime.php';
+include APP_ROOT . '/templates/authenticate.php';

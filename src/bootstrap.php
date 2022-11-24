@@ -12,3 +12,5 @@ if (DEV === false) {                                     // If not in developmen
 
 }
 lifetime_session(2073600); // put this in dev = false condition on production
+
+$date = new \DateTime;

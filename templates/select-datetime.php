@@ -14,6 +14,7 @@
   <!-- calendar -->
 
   <div class="container">
+
    <div class="calendar-container">
 
     <!-- calendar placeholder coming from ajax jquery -->
@@ -22,6 +23,11 @@
     <!-- displaying date chosen -->
     <p>Selected date: <span id="selected-date"></span></p>
     <p>Selected time: <span id="selected-time"></span></p>
+
+    <!-- date time form -->
+    <form method="POST" action="<?= DOC_ROOT ?>stylist/<?= html_escape($user['url_address']) ?>/cart/authenticate">
+     <input type="hidden" value="true" name="valid" />
+    </form>
    </div>
    <!-- end of calendar -->
 

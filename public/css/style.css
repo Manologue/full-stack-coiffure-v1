@@ -301,8 +301,6 @@ icons on bottom*/
 }
 /* form */
 .form {
-  width: 90vw;
-  max-width: var(--fixed-width);
   background: var(--white);
   border-radius: var(--borderRadius);
   box-shadow: var(--shadow-2);
@@ -949,6 +947,7 @@ FOOTER
   right: 15%;
   position: fixed;
   width: 50%;
+  font-size: 0.9rem;
   max-width: 300px;
 }
 #modal-success .container {
@@ -1773,32 +1772,32 @@ HOME PAGE
   }
 }
 
-#commande-page {
+#authenticate-page {
+  background: var(--grey-100);
   padding: 3rem 0;
-  background-image: url(../../images/pexels-gdtography-950241.jpg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
-#commande-page label {
+#authenticate-page label {
   font-size: 1rem;
 }
-#commande-page .form-row small {
+#authenticate-page .form-row small {
   color: red;
 }
-#commande-page .form h4 {
+#authenticate-page .form h4 {
   text-align: center;
 }
-#commande-page .form h4 > span {
+#authenticate-page .form h4 > span {
   color: var(--primary-300);
 }
-#commande-page .img-container {
-  max-width: 200px;
-  height: 200px;
-  margin-bottom: 1rem;
+#authenticate-page .form button {
+  font-weight: bolder;
+  font-size: 1.2rem;
 }
-#commande-page .img-container img {
-  height: 100%;
+@media screen and (min-width: 764px) {
+  #authenticate-page .container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+  }
 }
 
 #services-page .home {

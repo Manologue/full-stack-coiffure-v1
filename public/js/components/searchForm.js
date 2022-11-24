@@ -47,9 +47,11 @@ if (homeForm) {
     if (input.value !== '') {
       input.parentElement.querySelector('i:nth-child(2)').style.display = 'block'
     }
+    console.log(input.parentElement.querySelector('i:nth-child(2)'))
     // on click of close btn
     input.parentElement.querySelector('i:nth-child(2)').addEventListener('click', () => {
       input.parentElement.querySelector('i:nth-child(2)').style.display = 'none'
+
       if (input.dataset.id === 'date') {
         calendar.clear()
       } else {

@@ -137,7 +137,7 @@ if (isset($_GET['chosenLocation'])) {
   $user_id = $_GET['user_id'];
   $chosenLocation = $_GET['chosenLocation'];
   $user = User::action()->get_by_id($user_id);
-  $user['city_of_work'];
+  // $user['city_of_work'];
 
 
   $_SESSION["chosenLocation_$user_id"] = "";
