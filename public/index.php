@@ -9,9 +9,19 @@ $parts = explode('/', $path);                                // Split into array
 
 
 
-if ($parts[0] == 'admin') {
- $page = 'admin/' . ($parts[1] ?? '');
- $identifier   = $parts[2] ?? null;
+// routes configuration
+if ($parts[0] == 'admin' || $parts[0] == 'account') {
+ if ($parts[0] == 'admin') {
+  $page = 'admin/' . ($parts[1] ?? '');
+  $identifier   = $parts[2] ?? null;
+ }
+ if ($parts[0] == 'account') {
+  $page = 'account/' . ($parts[1] ?? '');
+  $identifier   = $parts[2] ?? null;
+  if ($identifier == null) {  // never enter account with no identifier
+   $page = 'error';
+  }
+ }
 } else {
  $page = $parts[0] ?: 'index';
  $identifier   = $parts[1] ?? null;
@@ -24,6 +34,32 @@ if ($parts[0] == 'admin') {
   }
  }
 }
+
+
+
+if (strpos($_SERVER['REQUEST_URI'], "authenticate") === false && strpos($_SERVER['REQUEST_URI'], "success") === false) {  // for security reasons
+ foreach ($_SESSION as $key => $value) {
+  if (is_string($key)) {
+   // echo $key;
+   if (strpos($key, "valid_date_time_") !== false) {
+    unset($_SESSION[$key]);
+   }
+  }
+ }
+}
+
+if (strpos($_SERVER['REQUEST_URI'], "success") === false) { // destroy all sessions after successfull booking
+ if (isset($_SESSION['success_booking'])) {
+  if (session_status() === PHP_SESSION_NONE) {
+   session_start();
+  }
+  $_SESSION = [];
+  session_destroy();
+ }
+ # code...
+}
+
+
 
 if (is_int($identifier)) {
  $identifier = filter_var($identifier, FILTER_VALIDATE_INT);                  // Validate ID

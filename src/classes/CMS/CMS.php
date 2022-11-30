@@ -97,15 +97,16 @@ class CMS {
 
  public function get($id, $published = true) {
   if ($published) {
-   return Database::table($this->table)->select()->where("id = :id AND published = 1", ["id" => $id])->fetchAll();
+   return Database::table($this->table)->select()->where("id = :id AND published = 1", ["id" => $id])->fetch();
   }
   return Database::table($this->table)->select()->where("id = :id", ["id" => $id])->fetch();
  }
 
  public function getAll($published = true) {
   if ($published) {
-   return Database::table($this->table)->select()->where("published = 1")->fetchAll();
+   return Database::table($this->table)->select()->where("published = 1 ORDER BY id DESC")->fetchAll();
   }
-  return  Database::table($this->table)->select()->all()->fetchAll();
+  return  Database::table($this->table)->select()->where("ORDER BY id DESC", [], false)->fetchAll();
+  // return  Database::table($this->table)->select()->all()->fetchAll();
  }
 }

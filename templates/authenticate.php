@@ -13,36 +13,50 @@
   <!-- end of alert -->
   <div class="container">
    <section class="section">
-    <form class="form">
-     <div class="form-row">
+    <?php if ($errors['warning']) { ?>
+     <div class="alert alert-danger"><?= $errors['warning'] ?></div>
+    <?php } ?>
+    <form class="form" action="<?= DOC_ROOT ?>stylist/<?= html_escape($user['url_address']) ?>/cart/authenticate" method="POST" enctype="multipart/form-data">
+     <div class=" form-row">
       <label for="name" class="form-label">Nom</label>
-      <input type="text" placeholder="hello there" id="name" class="form-input" />
+      <input type="text" name="name" placeholder="" id="name" class="form-input" value="<?= html_escape($booking['name'])  ?>" />
+      <small class="form-alert"><?= $errors['name'] ?></small>
      </div>
      <div class="form-row">
-      <label for="adress" class="form-label">Adress</label>
-      <input type="text" id="adress" class="form-input" />
+      <label for="adress" class="form-label">Adresse</label>
+      <input type="text" name="adress" id="adress" class="form-input" value="<?= html_escape($booking['adress']) ?>" />
+      <small class="form-alert"><?= $errors['adress'] ?></small>
      </div>
      <div class="form-row">
-      <label for="code_postal" class="form-label">Code postal</label>
-      <input type="text" id="code_postal" class="form-input" />
+      <label for="postal_code" class="form-label">Code postal</label>
+      <input type="text" name="postal_code" id="postal_code" class="form-input" value="<?= html_escape($booking['postal_code'])  ?>" />
+      <small class="form-alert"><?= $errors['postal_code'] ?></small>
      </div>
      <div class="form-row">
-      <label for="number" class="form-label">Tel</label>
-      <input type="number" id="number" class="form-input" />
+      <label for="tel" class="form-label">Tel</label>
+      <input type="tel" name="tel" id="tel" class="form-input" value="<?= html_escape($booking['tel'])  ?>" />
+      <small class="form-alert"><?= $errors['tel'] ?></small>
      </div>
      <div class="form-row">
       <label for="email" class="form-label">Email</label>
-      <input type="email" id="email" class="form-input" />
-      <small class="form-alert">please provide value</small>
+      <input type="email" name="email" id="email" class="form-input" value="<?= html_escape($booking['email'])  ?>" />
+      <small class="form-alert"><?= $errors['email'] ?></small>
      </div>
      <div class="form-row">
       <label for="textarea" class="form-label">Demande particuliere</label>
-      <textarea class="form-textarea"></textarea>
+      <textarea name="description" class="form-textarea"><?= html_escape($booking['description']) ?></textarea>
+      <small class="form-alert"><?= $errors['description'] ?></small>
      </div>
+     <!-- <div class="form-row">
+      <label for="textarea" class="form-label">Si vous avez une photo correspondant aux services ou coiffures que vous avez choisit vous pouvez l'envoyer</label>
+      <input type="file" id="image_file" class="form-input" />
+      <small class="form-alert">please provide value</small>
+     </div> -->
      <div class="form-row">
-      <input type="checkbox" name="" id=""><span> accept <a href="#">terms and conditions</a></span>
+      <input type="checkbox" name="terms" id="terms" <?= ($terms == 1) ? 'checked' : ''; ?>> <span> accept <a href="#">terms and conditions</a></span>
+      <small class="form-alert"><?= $errors['terms'] ?></small>
      </div>
-     <button type="submit" class="btn btn-block">nous faire parvenir</button>
+     <button type="submit" name="add_booking" class="btn btn-block">nous faire parvenir</button>
     </form>
    </section>
 

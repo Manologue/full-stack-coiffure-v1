@@ -18,11 +18,11 @@ class User extends CMS {
     return self::$instance;
   }
 
-  public function create($values) {
-    //check duplication before
+  public function create($user) {
+    $user['password'] = password_hash($user['password'], PASSWORD_DEFAULT);  // Hash password
     try {
       //code...
-      Database::table($this->table)->insert($values);
+      Database::table($this->table)->insert($user);
       return true;
     } catch (\Exception $e) {
       if (($e instanceof \PDOException) and ($e->errorInfo[1] === 1062)) { // If error is integrity constraint
@@ -32,11 +32,12 @@ class User extends CMS {
       }
     }
   }
-  public function update($values, $id) {
+
+  public function update($user, $id) {
     // check duplication before
     try {
       //code...
-      Database::table($this->table)->update($values)->where("id = :id", ["id" => $id]);
+      Database::table($this->table)->update($user)->where("id = :id", ["id" => $id]);
       return true;
     } catch (\Exception $e) {
       if (($e instanceof \PDOException) and ($e->errorInfo[1] === 1062)) { // If error is integrity constraint
@@ -60,6 +61,16 @@ class User extends CMS {
     }
   }
 
+  public function login(string $email, string $password) {
+    $user = $this->action()->get_by_email($email);
+    if (!$user) {                                             // If no member found
+      return false;                                           // Return false
+    }                                                           // Otherwise
+    $authenticated = password_verify($password, $user['password']); // Did password match
+    return ($authenticated ? $user : false);                  // Return whether password matched
+  }
+
+  //**** this is strickly for stylist in user category */
   public function get_all($published = true, $category = null, $user = null, $limit = 10000) {
     $arguments['category']  = $category;             // Category id
     $arguments['category1'] = $category;             // Category id
@@ -78,7 +89,7 @@ class User extends CMS {
             AND (uc.user_id   = :user   OR :user1   is null) ";
 
     if ($published) {                                // If must be published
-      $sql .= "AND u.published = 1 ";              // Add clause to SQL
+      $sql .= "AND u.published = 1 AND u.role = 'stylist' ";              // Add clause to SQL
     }
 
     // when we want to select as the users
@@ -87,10 +98,10 @@ class User extends CMS {
     }
     $sql .= " LIMIT :limit;";
 
-    return Database::table($this->table)->query($sql, $arguments)->fetchAll();
+    return Database::table('user_category')->query($sql, $arguments)->fetchAll();
   }
 
-  public function search(string $location, string $services = '', string $day = '', $published = true) {
+  public function search(string $location, string $services = '', string $day = '') {
     $day = date('l', strtotime($day));
     $day_name = '%' . $day . '%';
     $services_list  = explode(",", $services);
@@ -124,9 +135,6 @@ class User extends CMS {
 
     $sql .= $sql_custom;
 
-    if ($published) {                                // If must be published
-      $sql .= "AND u.published = 1 ";                // Add clause to SQL
-    }
 
     $sql .= "GROUP BY u.id";
 
@@ -163,4 +171,6 @@ class User extends CMS {
 
     return Database::table("user_day")->query($sql, $arguments)->fetchAll();
   }
+
+  /***********************end of user category */
 }

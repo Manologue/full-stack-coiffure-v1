@@ -26,6 +26,11 @@
         place-items: center;
       }
     }
+    @media screen and (min-width: 1447px) {
+      .field-date {
+        width: 15%;
+      }
+    }
   }
 
   // .results {

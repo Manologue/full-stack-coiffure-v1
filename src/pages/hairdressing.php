@@ -25,12 +25,18 @@ $id = $category['id'];
 
 $users = User::action()->get_all(true, $id);
 
+
+if (!$users) {  // if no users in the category that is published and not suspended then redirect to home page
+ redirect("");
+}
+
+
 // getting each user with all his categories
 foreach ($users as $user) {
  $users_infos[] =  User::action()->get_all(true, null, $user['id']);
 }
 
-$categories = Category::action()->getAll();
+// $categories = Category::action()->getAll();
 
 
 include APP_ROOT . '/templates/hairdressing.php';

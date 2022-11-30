@@ -3,12 +3,24 @@
   let array_list = []
   if (picker) {
     let serviceContainer = document.querySelector('.services-container')
-    let user_id = serviceContainer.dataset.user_id
+    let stylistProilePageContainer = document.querySelector(
+      '.stylist-profile-page-services'
+    )
+
+    let user_id
+    let slash = '../../../../'
+    if (serviceContainer) {
+      user_id = serviceContainer.dataset.user_id
+    }
+    if (stylistProilePageContainer) {
+      user_id = stylistProilePageContainer.dataset.id
+      slash = '../../'
+    }
 
     console.log(user_id)
     $.ajax({
       type: 'GET',
-      url: `../../../../src/pages/ajax/date-time.php?user_id=${user_id}`,
+      url: `${slash}src/pages/ajax/date-time.php?user_id=${user_id}`,
       success: function (result) {
         console.log(result)
         array_list = $.parseJSON(result)
@@ -27,13 +39,13 @@
 
           selectedDates: [],
 
-          onClick: function (ev, data) {
-            // data is a list of datetimes
-            var d = data[0].split(' ')[0]
-            var t = data[0].split(' ')[1]
-            $('#selected-date').html(d)
-            $('#selected-time').html(t)
-          },
+          // onClick: function (ev, data) {
+          //   // data is a list of datetimes
+          //   var d = data[0].split(' ')[0]
+          //   var t = data[0].split(' ')[1]
+          //   $('#selected-date').html(d)
+          //   $('#selected-time').html(t)
+          // },
           onClickNavigator: function (ev, instance) {
             var arr = [
               [

@@ -1,10 +1,10 @@
-let calendar = flatpickr('#search-day', {
-  altInput: true,
-  altFormat: 'F j, Y',
-  dateFormat: 'Y-m-d',
-  minDate: 'today',
-  locale: 'de', // locale for this instance only
-})
+// let calendar = flatpickr('#search-day', {
+//   altInput: true,
+//   altFormat: 'F j, Y',
+//   dateFormat: 'Y-m-d',
+//   minDate: 'today',
+//   locale: 'de', // locale for this instance only
+// })
 
 const inputLocation = document.querySelector('#location-input'),
   inputServices = document.querySelector('#services-input'),
@@ -51,7 +51,7 @@ if (modalOverlay) {
 
         clearBtn.addEventListener('click', () => {
           // inputDate.value = ''
-          calendar.clear()
+          // calendar.clear()
           clearBtn.style.display = 'none'
         })
       }
@@ -231,6 +231,7 @@ if (modalOverlay) {
     // console.log(cartContainer.dataset.services_count)
 
     const modalTextContainer = document.querySelector('#modal-danger .content')
+    const modalHeader = document.querySelector('#modal-danger header span')
     const closeBtn = document.querySelector('#modal-danger .close')
     console.log(sessionStorage.getItem('checkLocation'))
     console.log(cartContainer.dataset.services_count)
@@ -261,6 +262,9 @@ if (modalOverlay) {
         // if location or services are not filled
         modalAlert.style.display = 'block'
         if (cartContainer.dataset.services_count < 1) {
+          modalHeader.innerHTML = `     
+        <i class="fa-solid fa-circle-exclamation"></i> Espace services
+          `
           modalTextContainer.innerHTML = `<p>
           s'il vous plait veillez choisir au moins un service
           </p>`

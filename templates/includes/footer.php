@@ -74,8 +74,9 @@
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 <!-- app js -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> -->
-<script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
+<!-- <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script> -->
 <!-- <script src="https://npmcdn.com/flatpickr/dist/l10n/de.js"></script> -->
+<!-- <script src="https://unpkg.com/js-datepicker"></script> -->
 
 <!-- custom js file link -->
 <script type="module" src="<?= DOC_ROOT ?>/js/app.js"></script>

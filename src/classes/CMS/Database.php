@@ -13,6 +13,11 @@ class Database {
   protected $query_type = "select";
 
 
+  public static function connection() {
+    return self::$con;
+  }
+
+
   public static function table($table) {
 
     self::$table = $table;

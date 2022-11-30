@@ -25,7 +25,6 @@
   form i:nth-child(2) {
     position: absolute;
     top: 50%;
-    right: 18px;
     color: var(--black);
     font-size: 25px;
     color: var(--primary-600);
@@ -33,6 +32,12 @@
     transform: translateY(-50%);
     display: none;
     cursor: pointer;
+  }
+  .field-except i:nth-child(2) {
+    right: 18px;
+  }
+  .field-date i:nth-child(2) {
+    right: 40px !important;
   }
 
   form .field input {

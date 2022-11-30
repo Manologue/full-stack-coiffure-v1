@@ -38,7 +38,13 @@ $gallery = User::action()->get_gallery($id);
 
 $services = ServiceCreated::action()->get_all(true, $id);  // get all user services
 
+// echo $user['role'];
+
 if (!empty($services) || count($services) !== 0) {
+
+ if ($user['role'] === 'suspended') {
+  redirect("");
+ }
 
  $starter_category_id = $services[0]['category_id'];  // first cat id, note that the query of services is order by category_id
 
@@ -57,8 +63,7 @@ if (!empty($services) || count($services) !== 0) {
  }
  $cart_page = "stylist";
 } else {
- echo "<h1>you have no services to offer bro !!!!</h1>";
- die;
+ redirect("");
 }
 
 include APP_ROOT . '/templates/stylist.php';

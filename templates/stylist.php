@@ -32,6 +32,7 @@
     </div>
    </section>
   </div>
+
  </div>
  <!-- ************************** modals ************************ -->
  <?php include('includes/modals.php') ?>

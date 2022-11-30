@@ -27,7 +27,7 @@ if (window.location.toString().includes('cart')) {
 // } else {
 //   console.log('empty my brother')
 // }
-if (picker) {
+if (picker && cartContainer) {
   picker.addEventListener('click', async (e) => {
     if (e.target && e.target.matches('#picker .myc-available-time')) {
       let time = e.target.dataset.time

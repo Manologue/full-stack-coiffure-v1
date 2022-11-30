@@ -26,7 +26,8 @@ if (isset($_GET['user_id'])) {
  for ($i = 1; $i < 8; $i++) {
 
   if (!array_key_exists($checker, $user_day_time)) {
-   break;
+   $result_of_schedule[] = [];
+   continue;
   }
   // echo 'oui';
   if ($user_day_time[$checker]['day'] ===  $i) {
@@ -110,8 +111,10 @@ if (isset($_GET['valid_date_time'])) {
  $user_id = $_GET['id'];
 
  $_SESSION["valid_date_time_{$user_id}"] = 'invalid';
+
+
  if ($date) {
-  $_SESSION["valid_date_time_{$user_id}"] = $date;
+  $_SESSION["valid_date_time_{$user_id}"] = $date . ':00';
   echo 'true';
  }
  # code...

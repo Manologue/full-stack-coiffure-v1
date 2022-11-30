@@ -11,10 +11,11 @@
  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" />
  <!-- custom css file link  -->
  <link rel="stylesheet" href="<?= DOC_ROOT ?>/css/style.css?v=<?= time(); ?>" />
+ <!-- <link rel="stylesheet" href="https://unpkg.com/js-datepicker/dist/datepicker.min.css"> -->
 
  <!-- js links -->
  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css" />
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+ <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" /> -->
  <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 
 

@@ -16,7 +16,9 @@
    <div class="destination">
     <div class="head">
      <span><i class="fa-solid fa-location-dot"></i> Destination address</span>
-     <a id="destination-btn" href="#">modifier</a>
+     <?php if ($cart_page !== "success") { ?>
+      <a id="destination-btn" href="#">modifier</a>
+     <?php } ?>
     </div>
     <div class="info">
      <p>
@@ -31,8 +33,8 @@
    <div class="services-cart">
     <div class="head">
      <span><i class="fa-solid fa-cart-shopping"></i> Services selectionnes</span>
-     <?php if ($cart_page !== "stylist") { ?>
-      <a id="destination-btn" href="<?= DOC_ROOT ?>stylist/<?= html_escape($user['url_address']) ?>">modifier</a>
+     <?php if ($cart_page !== "stylist" && $cart_page !== "success") { ?>
+      <a id="" href="<?= DOC_ROOT ?>stylist/<?= html_escape($user['url_address']) ?>">modifier</a>
      <?php } ?>
     </div>
     <div class="services-container" data-user_id=<?= html_escape($user['id']) ?> data-services_count=<?= html_escape(($_SESSION["count_services_{$user['id']}"]) ?? 0) ?>>
@@ -40,15 +42,17 @@
 
     </div>
    </div>
-   <?php if ($cart_page !== 'stylist') {
-   ?>
+   <?php if ($cart_page === 'authenticate' || $cart_page === 'success') { ?>
     <div class="date-time">
      <div class="head">
       <span><i class="fa-regular fa-clock"></i> Date & heure</span>
+      <?php if ($cart_page !== "success") { ?>
+       <a id="" href="<?= DOC_ROOT ?>stylist/<?= html_escape($user['url_address']) ?>/cart/select-datetime">modifier</a>
+      <?php } ?>
      </div>
      <div class="info">
       <p>
-       <?= $_SESSION["valid_date_time_{$user['id']}"] ? $format_date . ' a ' . $format_time . ' h ' : "" ?>
+       <?= isset($_SESSION["valid_date_time_{$user['id']}"]) ? $format_date . ' a ' . $format_time . ' h ' : "" ?>
       </p>
      </div>
     </div>

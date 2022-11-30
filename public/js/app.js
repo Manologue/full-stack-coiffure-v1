@@ -5,8 +5,9 @@ import './components/modals.js'
 import './components/searchForm.js'
 import './components/cart.js'
 
-import './components/flatpickr.js'
+// import './components/flatpickr.js'
 import './components/flickity.js'
+// import './components/datepicker'
 
 // pages
 import './pages/home.js'

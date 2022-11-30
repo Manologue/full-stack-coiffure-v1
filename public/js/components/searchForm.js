@@ -1,12 +1,34 @@
 const homeForm = document.querySelector('.home-form')
 const modal = document.querySelector('#modal-danger')
 const modalTextContainer = document.querySelector('#modal-danger .content')
+var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
 if (homeForm) {
+  // document.getElementById('#search-day').setAttribute('min', new Date())
+
   const closeBtn = modal.querySelector('.close')
   const locationInput = homeForm.querySelector('#location-input')
   const servicesInput = homeForm.querySelector('#services-input')
   const dateInput = homeForm.querySelector('#search-day')
+  // some date input configurations
+  // // Use Javascript
+  var today = new Date()
+  var dd = today.getDate()
+  var mm = today.getMonth() + 1 //January is 0 so need to add 1 to make it 1!
+  var yyyy = today.getFullYear()
+  if (dd < 10) {
+    dd = '0' + dd
+  }
+  if (mm < 10) {
+    mm = '0' + mm
+  }
+
+  today = yyyy + '-' + mm + '-' + dd
+
+  dateInput.setAttribute('min', today)
+
+  //****************en of date input config */
+
   homeForm.addEventListener('submit', (e) => {
     e.preventDefault()
     sessionStorage.setItem('location', locationInput.value)
@@ -32,14 +54,14 @@ if (homeForm) {
   servicesInput.value = sessionStorage.getItem('services')
   dateInput.value = sessionStorage.getItem('date')
 
-  let calendar = flatpickr('#search-day', {
-    altInput: true,
-    altFormat: 'F j, Y',
-    dateFormat: 'Y-m-d',
-    minDate: 'today',
-    value: dateInput.value,
-    locale: 'de', // locale for this instance only
-  })
+  // let calendar = flatpickr('#search-day', {
+  //   altInput: true,
+  //   altFormat: 'F j, Y',
+  //   dateFormat: 'Y-m-d',
+  //   minDate: 'today',
+  //   value: dateInput.value,
+  //   locale: 'de', // locale for this instance only
+  // })
 
   const inputs = homeForm.querySelectorAll('.field input')
   inputs.forEach((input) => {
@@ -53,7 +75,8 @@ if (homeForm) {
       input.parentElement.querySelector('i:nth-child(2)').style.display = 'none'
 
       if (input.dataset.id === 'date') {
-        calendar.clear()
+        // calendar.clear()
+        input.value = null
       } else {
         input.value = ''
       }

@@ -18,8 +18,22 @@ function lifetime_session($timeout) {
   echo "<script>alert('votre session a expirée')</script>";
  }
 }
+function showMessage($type, $message) {
+ return '<div class="alert alert-' . $type . ' alert-dismissible fade show" role="alert">
+           <strong>' . $message . '</strong>
+           <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+         </div>';
+}
 
-
+function generateRandomString($length = 10) {
+ $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+ $charactersLength = strlen($characters);
+ $randomString = '';
+ for ($i = 0; $i < $length; $i++) {
+  $randomString .= $characters[rand(0, $charactersLength - 1)];
+ }
+ return $randomString;
+}
 function html_escape($text): string {
  $text = $text ?? '';
  return htmlspecialchars($text, ENT_QUOTES, 'UTF-8', false); // Return escaped string

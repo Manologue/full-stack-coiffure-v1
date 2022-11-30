@@ -18,11 +18,18 @@ class Category extends CMS {
   return self::$instance;
  }
 
- public function create($values) {
+ public function create($category, $temporary, $destination) {
   //check duplication before
   try {
+   if ($destination) {  // If image uploaded
+    // Crop and save file
+    $imagick = new \Imagick($temporary);     // Object to represent image
+    $imagick->cropThumbnailImage(1200, 700); // Create cropped image
+    $imagick->writeImage($destination);      // Save file
+   }
    //code...
-   Database::table($this->table)->insert($values);
+   Database::table($this->table)->insert($category);
+
    return true;
   } catch (\Exception $e) {
    if (($e instanceof \PDOException) and ($e->errorInfo[1] === 1062)) { // If error is integrity constraint
@@ -32,11 +39,18 @@ class Category extends CMS {
    }
   }
  }
- public function update($values, $id) {
+ public function update($category, $id, $temporary, $destination) {
   // check duplication before
   try {
+   if ($destination) {                          // If image uploaded
+    // Crop and save file
+    $imagick = new \Imagick($temporary);     // Object to represent image
+    $imagick->cropThumbnailImage(1200, 700); // Create cropped image
+    $imagick->writeImage($destination);      // Save file
+   }
    //code...
-   Database::table($this->table)->update($values)->where("id = :id", ["id" => $id]);
+   unset($category['seo_category'], $category['id']);
+   Database::table($this->table)->update($category)->where("id = :id", ["id" => $id]);
    return true;
   } catch (\Exception $e) {
    if (($e instanceof \PDOException) and ($e->errorInfo[1] === 1062)) { // If error is integrity constraint
@@ -61,14 +75,24 @@ class Category extends CMS {
  }
 
 
+ //**** select categories that stylist users choosed only  */
 
 
- // public function get_all($published = true, $user = null, $limit = 10000) {
- //  $arguments['user'] = $user;             // User id
- //  $arguments['user1'] = $user;             // User id
- //  $arguments['limit']     = $limit;                // Max articles to return
+ // only display categories that users that are valid(ie not suspended, stylist and published) have chosen 
+ public function get_all($published = true) {
 
+  $sql = "SELECT c.id, c.title, c.image, c.published, c.seo_title, c.description, c.content 
+  FROM user_category AS uc
+    JOIN user AS u ON uc.user_id = u.id
+    JOIN category AS c ON uc.category_id = c.id 
+  WHERE c.published = 1 ";
 
- //  $sql = "SELECT c.id c.title, c.description, "
- // }
+  if ($published) {                                // If must be published
+   $sql .= "AND u.published = 1 AND u.role = 'stylist' ";              // Add clause to SQL
+  }
+
+  $sql .= "GROUP BY c.id";
+
+  return Database::table("user_category")->query($sql)->fetchAll();
+ }
 }

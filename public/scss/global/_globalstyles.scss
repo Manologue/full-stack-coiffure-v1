@@ -257,6 +257,9 @@ icons on bottom*/
   letter-spacing: var(--letterSpacing);
   text-transform: capitalize;
 }
+.form-row small {
+  color: red;
+}
 
 /* alerts */
 .alert {

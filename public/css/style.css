@@ -355,6 +355,10 @@ icons on bottom*/
   text-transform: capitalize;
 }
 
+.form-row small {
+  color: red;
+}
+
 /* alerts */
 .alert {
   padding: 0.375rem 0.75rem;
@@ -667,13 +671,20 @@ FOOTER
 #modal-location form i:nth-child(2) {
   position: absolute;
   top: 50%;
-  right: 18px;
   color: var(--black);
   font-size: 25px;
   color: var(--primary-600);
   transform: translateY(-50%);
   display: none;
   cursor: pointer;
+}
+.home .field-except i:nth-child(2),
+#modal-location .field-except i:nth-child(2) {
+  right: 18px;
+}
+.home .field-date i:nth-child(2),
+#modal-location .field-date i:nth-child(2) {
+  right: 40px !important;
 }
 .home form .field input,
 #modal-location form .field input {
@@ -1771,6 +1782,11 @@ HOME PAGE
     place-items: center;
   }
 }
+@media screen and (min-width: 1447px) {
+  #search-page .home .field-date {
+    width: 15%;
+  }
+}
 
 #authenticate-page {
   background: var(--grey-100);
@@ -1778,9 +1794,6 @@ HOME PAGE
 }
 #authenticate-page label {
   font-size: 1rem;
-}
-#authenticate-page .form-row small {
-  color: red;
 }
 #authenticate-page .form h4 {
   text-align: center;
@@ -2168,4 +2181,8 @@ HOME PAGE
 }
 #datetime-page #cart.section.cart {
   padding-top: 65px;
+}
+
+#successs-page {
+  background: var(--grey-100);
 }/*# sourceMappingURL=style.css.map */

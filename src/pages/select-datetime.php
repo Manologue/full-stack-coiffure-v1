@@ -51,6 +51,16 @@ if (isset($_SESSION["valid_date_time_{$user['id']}"])) { // if date has already 
  $format_time = $date->format('H:i:');
 }
 
+//check if stylist has already made his scheduled date
+
+$user_day_time = User::action()->get_date_time($user['id']);
+
+// echo '<pre>';
+// var_dump($user_day_time);
+// echo '</pre>';
+
+// die;
+
 
 
 
@@ -58,6 +68,10 @@ $services = ServiceCreated::action()->get_all(true, $id);  // get all user servi
 
 
 if (!empty($services) || count($services) !== 0) {
+
+ if ($user['role'] === 'suspended') {
+  redirect("");
+ }
 
  $starter_category_id = $services[0]['category_id'];  // first cat id, note that the query of services is order by category_id
 
@@ -76,8 +90,7 @@ if (!empty($services) || count($services) !== 0) {
  }
  $cart_page = "datetime";
 } else {
- echo "<h1>you have no services to offer bro !!!!</h1>";
- die;
+ redirect("");
 }
 
 

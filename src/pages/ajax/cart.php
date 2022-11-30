@@ -59,6 +59,8 @@ if (isset($_GET['readTotalPrice'])) {
       $total +=  $service['service_price'];
     }
   }
+  $_SESSION["total_service_amount_$user_id"] = $total;
+
   $output = "<span class='total-text'>Total:</span>{$total}$";
   echo $output;
 }

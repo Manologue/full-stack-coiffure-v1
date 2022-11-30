@@ -4,9 +4,11 @@
 
 declare(strict_types=1);                                 // Use strict types
 
-
+use StylistCommerce\CMS\Booking;
+use StylistCommerce\CMS\Database;
 use StylistCommerce\CMS\ServiceCreated;
 use StylistCommerce\CMS\User;
+use StylistCommerce\Validate\Validate;
 
 
 
@@ -22,17 +24,16 @@ if (!$user) {                                          // If user is empty
 }
 $id = $user['id'];   // user id
 
+// echo '<pre>';
+// var_dump($_SESSION["user_$id"]);
+// echo '</pre>';
+// die;
+
 
 if (isset($_POST['valid'])) {                         // check that it was validated by cart form before continuing
  $_SESSION["valid_cart_user_{$user['id']}"] = true;
- // echo 'valid';
 }
 
-
-// echo '<pre>';
-// var_dump($_SESSION);
-// echo '</pre>';
-// die;
 
 $is_valid_location = $_SESSION["chosenLocation_{$user['id']}"] ?? "invalid";  // check if cart location is valid
 
@@ -78,6 +79,121 @@ if (!empty($services) || count($services) !== 0) {
  echo "<h1>you have no services to offer bro !!!!</h1>";
  die;
 }
+
+// $temp        = $_FILES['image']['tmp_name'] ?? '';       // Temporary image
+// $destination = '';                                     // Where to save file
+$saved_booking       = null;                                     // Did booking save
+
+
+// Initialize variables needed for the HTML page
+
+$booking = [
+ 'user_id' => $user['id'],
+ 'name'       => '',
+ 'adress'     => '',
+ 'postal_code'     => '',
+ 'tel'   => '',
+ 'email' => '',
+ 'description'    => '',
+ 'date_time'    =>  $_SESSION["valid_date_time_{$user['id']}"],
+ 'location' => $user['city_of_work'],
+ 'amount' => $_SESSION["total_service_amount_{$user['id']}"]
+
+];
+$terms = 0;
+
+$errors  = [
+ 'warning' => '',
+ 'name'     => '',
+ 'adress'       => '',
+ 'postal_code'     => '',
+ 'tel'     => '',
+ 'email'      => '',
+ 'description'    => '',
+ 'terms'    => ''
+];
+
+if (isset($_POST['add_booking'])) {  // on submit form
+ // get booking data 
+ $booking['name'] = $_POST['name'];
+ $booking['adress'] = $_POST['adress'];
+ $booking['postal_code'] = $_POST['postal_code'];
+ $booking['tel'] = $_POST['tel'];
+ $booking['email'] = $_POST['email'];
+ $booking['description'] = $_POST['description'];
+ // $booking['terms'] = $_POST['terms'];
+ $terms = isset($_POST['terms']) ? 1 : 0;
+
+ // echo '<pre>';
+ // var_dump($_POST);
+ // echo '</pre>';
+ // echo $booking['terms'];
+ // die;
+
+ // Validate article data and create error messages if it is invalid
+ $errors['email']    = Validate::isEmail($booking['email'])
+  ? '' : 'Please enter a valid email address';           // Validate email
+
+ $errors['name']    = Validate::isText($booking['name'], 1, 80)
+  ? '' : 'name should be 1 - 80 characters.';     // Validate name
+
+ $errors['tel']  = Validate::isText($booking['tel'], 1, 20)
+  ? '' : 'adress must be 1-20 characters';
+
+ $errors['adress']    = Validate::isText($booking['adress'], 1, 200)
+  ? '' : 'adress should be 1 - 80 characters.';     // Validate tel
+
+ $errors['postal_code']    = Validate::isText($booking['postal_code'], 0, 40)
+  ? '' : 'postal_code should not exceed 40 characters.';     // Validate postal
+
+ if ($terms === 0) {
+  $errors['terms']    = 'You must agree to the terms of service';
+ }
+
+ $invalid_post = implode($errors);
+
+ if ($invalid_post !== '') {
+  $errors['warning'] = 'Please correct form errors';
+ } else {
+  // insert booking data into the database
+  $arguments = $booking;
+
+  $saved_booking = Booking::action()->create($arguments);
+
+  // echo $saved;
+  if ($saved_booking) {
+
+   $last_id = Database::table('booking')::connection()->lastInsertId();
+
+   $arguments_report = $_SESSION["user_{$user['id']}"];
+
+   foreach ($arguments_report as $argument) {
+    unset($argument['user_id']);
+    $argument['booking_id'] = $last_id;
+    $saved_report = Booking::action()->create_report($argument);
+    if ($saved_report === false) {
+     $errors['warning'] = 'Something went wrong. Please try again later';
+    }
+   }
+   if ($errors['warning'] == '') {
+    $_SESSION['success_booking'] = 'Your booking has been added successfully';
+    header('Location: ' . DOC_ROOT . 'stylist/' . $user['url_address'] . '/cart/success');
+   }
+  } else {
+   $errors['warning'] = 'Something went wrong. Please try again later';
+  }
+
+  // echo '<pre>';
+  // var_dump($arguments);
+  // echo '</pre>';
+ }
+}
+
+
+// echo '<pre>';
+// var_dump($_SESSION);
+// echo '</pre>';
+
 
 
 include APP_ROOT . '/templates/authenticate.php';

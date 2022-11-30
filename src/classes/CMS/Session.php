@@ -9,12 +9,17 @@ class Session {
  public $first_name;                                    // Store user's forename
  public $role;                                        // Store user's role
 
+ public $url_address;                                          // Store user's url_address
  public $timeout = 1000;                             // before session timeout
 
  public function __construct() {                                                    // Runs when object created
+  if (session_status() === PHP_SESSION_NONE) {    // Start, or restart, session
+   session_start();
+  }
   $this->id       = $_SESSION['id'] ?? 0;          // Set id property of this object
   $this->first_name = $_SESSION['first_name'] ?? '';   // Set forename property of this object
   $this->role     = $_SESSION['role'] ?? 'public'; // Set role property of this object
+  $this->url_address = $_SESSION['url_address'] ?? 'public_00000'; // set url_address property of this object
  }
 
 
@@ -34,6 +39,7 @@ class Session {
   $_SESSION['id']       = $user['id'];           // Add user id to session
   $_SESSION['first_name'] = $user['first_name'];     // Add forename to session
   $_SESSION['role']     = $user['role'];         // Add role to session
+  $_SESSION['url_address']       = $user['url_address'];           // Add url address to session
  }
 
  // Update existing session - alias for create()
