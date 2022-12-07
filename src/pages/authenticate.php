@@ -12,10 +12,18 @@ use StylistCommerce\Validate\Validate;
 
 
 
+
 if (!$identifier) {                                                // If no valid id
  include APP_ROOT . '/src/pages/page-not-found.php';    // Page not found
  die;
 }
+
+if (isset($_SESSION['role']) == 'stylist') {
+ $_SESSION['failure'] = 'Sorry you cannot access this page if you are still still logged in as a stylist';
+ redirect('stylist/' . $identifier);
+}
+
+
 $user = User::action()->get_by_url_address($identifier);
 
 if (!$user) {                                          // If user is empty
@@ -91,7 +99,7 @@ $booking = [
  'user_id' => $user['id'],
  'name'       => '',
  'adress'     => '',
- 'postal_code'     => '',
+ 'zip_code'     => '',
  'tel'   => '',
  'email' => '',
  'description'    => '',
@@ -106,7 +114,7 @@ $errors  = [
  'warning' => '',
  'name'     => '',
  'adress'       => '',
- 'postal_code'     => '',
+ 'zip_code'     => '',
  'tel'     => '',
  'email'      => '',
  'description'    => '',
@@ -117,7 +125,7 @@ if (isset($_POST['add_booking'])) {  // on submit form
  // get booking data 
  $booking['name'] = $_POST['name'];
  $booking['adress'] = $_POST['adress'];
- $booking['postal_code'] = $_POST['postal_code'];
+ $booking['zip_code'] = $_POST['zip_code'];
  $booking['tel'] = $_POST['tel'];
  $booking['email'] = $_POST['email'];
  $booking['description'] = $_POST['description'];
@@ -143,8 +151,8 @@ if (isset($_POST['add_booking'])) {  // on submit form
  $errors['adress']    = Validate::isText($booking['adress'], 1, 200)
   ? '' : 'adress should be 1 - 80 characters.';     // Validate tel
 
- $errors['postal_code']    = Validate::isText($booking['postal_code'], 0, 40)
-  ? '' : 'postal_code should not exceed 40 characters.';     // Validate postal
+ $errors['zip_code']    = Validate::isText($booking['zip_code'], 0, 40)
+  ? '' : 'zip_code should not exceed 40 characters.';     // Validate postal
 
  if ($terms === 0) {
   $errors['terms']    = 'You must agree to the terms of service';
