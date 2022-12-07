@@ -25,7 +25,7 @@
  <link href="<?= DOC_ROOT ?>dashboard/assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style">
 
  <!-- added css -->
- <link href="<?= DOC_ROOT ?>dashboard/assets/css/style.css" rel="stylesheet" type="text/css">
+ <link href="<?= DOC_ROOT ?>dashboard/assets/css/style.css?v=<?= time(); ?>" rel="stylesheet" type="text/css">
 
 
 

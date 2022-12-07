@@ -26,12 +26,12 @@ if (isset($_GET['delete'])) {
  if ($image == "" || $image == "blank.png") {
   echo 'false';
  } else {
-  if (file_exists($direction)) {                        // If image file exists
-   unlink($direction);                               // Delete image file
-  }
-  $category['image'] = "blank.png";
-  $updated = Category::action()->update($category, $identifier, null, null);
+  $category_image['image'] = "blank.png";
+  $updated = Category::action()->update($category_image, $identifier, null, null);
   if ($updated) {
+   if (file_exists($direction)) {                        // If image file exists
+    unlink($direction);                               // Delete previous image file
+   }
    // redirect('admin/category/' . $identifier, ['success' => 'picture removed successfully']); // Redirect
    echo 'true';
   }

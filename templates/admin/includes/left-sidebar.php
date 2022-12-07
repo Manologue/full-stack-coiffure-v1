@@ -1,7 +1,7 @@
 <div class="leftside-menu">
 
  <!-- LOGO -->
- <a href="index.html" class="logo text-center logo-light">
+ <a href="<?= DOC_ROOT  ?>" class="logo text-center logo-light">
   <span class="logo-lg">
    <img src="<?= DOC_ROOT ?>dashboard/assets/images/logo.png" alt="" height="16">
   </span>
@@ -11,7 +11,7 @@
  </a>
 
  <!-- LOGO -->
- <a href="index.html" class="logo text-center logo-dark">
+ <a href="<?= DOC_ROOT  ?>" class="logo text-center logo-dark">
   <span class="logo-lg">
    <img src="<?= DOC_ROOT ?>dashboard/assets/images/logo-dark.png" alt="" height="16">
   </span>

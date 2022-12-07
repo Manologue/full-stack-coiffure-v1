@@ -914,7 +914,6 @@ FOOTER
 }
 #modal-location .content .results .error {
   color: var(--red-dark);
-  display: none;
 }
 #modal-location .content .results span {
   transition: var(--transition);
@@ -2185,4 +2184,124 @@ HOME PAGE
 
 #successs-page {
   background: var(--grey-100);
+}
+
+#stylist-profile-page {
+  padding: 5rem 0;
+  background: var(--grey-100);
+}
+#stylist-profile-page .section {
+  padding: 0;
+  padding-bottom: 1.25rem;
+}
+#stylist-profile-page .stylist .stylist-center {
+  background: var(--white);
+}
+#stylist-profile-page .stylist .profile {
+  padding-top: 1.5rem;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+#stylist-profile-page .stylist .profile h5 {
+  margin: 0;
+}
+#stylist-profile-page .stylist .profile img {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+}
+#stylist-profile-page .stylist .profile .experience {
+  margin-top: 0.65rem;
+}
+#stylist-profile-page .stylist .profile .experience > span {
+  background: var(--primary-600);
+  color: var(--white);
+  padding: 0.2rem;
+  border-radius: 0.2rem;
+  margin-right: 0.3rem;
+}
+#stylist-profile-page .stylist .about {
+  border-top: solid 1px var(--grey-200);
+}
+#stylist-profile-page .stylist .services .container {
+  border: solid 2px var(--grey-200);
+}
+#stylist-profile-page .stylist .services article:first-child .service {
+  border-top: none;
+}
+#stylist-profile-page .stylist .services article .service-div {
+  padding: 1rem 2rem;
+}
+#stylist-profile-page .stylist .services article .service {
+  border-bottom: solid 2px var(--grey-200);
+  border-top: solid 2px var(--grey-200);
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  cursor: pointer;
+}
+#stylist-profile-page .stylist .services article .service span {
+  font-weight: bolder;
+  text-transform: capitalize;
+}
+#stylist-profile-page .stylist .services article .products.show {
+  display: block;
+}
+#stylist-profile-page .stylist .services article .products {
+  display: none;
+  background: var(--grey-1300);
+}
+#stylist-profile-page .stylist .services article .products .single-product:not(:first-child) {
+  border-top: solid 1px var(--grey-200);
+  padding-top: 1rem;
+}
+#stylist-profile-page .stylist .services article .products .single-product {
+  padding-bottom: 1rem;
+}
+#stylist-profile-page .stylist .services article .products .single-product span {
+  text-transform: capitalize;
+  font-weight: bolder;
+}
+#stylist-profile-page .stylist .services article .products .single-product div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#stylist-profile-page .stylist .services article .products .single-product div span {
+  color: var(--primary-700);
+}
+#stylist-profile-page .stylist .services article .products .single-product div .price {
+  border: solid 2px var(--primary-700);
+  padding: 0.15rem;
+}
+#stylist-profile-page .stylist .gallery {
+  padding-bottom: 2rem;
+}
+#stylist-profile-page .stylist .gallery .carousel-cell {
+  height: 350px;
+  margin: 0 10px;
+  display: flex;
+}
+#stylist-profile-page .stylist .gallery .carousel-cell img {
+  width: 100%;
+  height: 350px;
+}
+#stylist-profile-page .stylist .comments .info-comment .name {
+  font-weight: bolder;
+  margin-right: 0.5rem;
+}
+@media screen and (min-width: 992px) {
+  #stylist-profile-page .divider {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: "b c";
+    gap: 1rem;
+  }
+}
+#stylist-profile-page .divider .cart {
+  grid-area: c;
+}
+#stylist-profile-page .divider .stylist {
+  grid-area: b;
 }/*# sourceMappingURL=style.css.map */

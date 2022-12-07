@@ -4,12 +4,13 @@
 include '../../bootstrap.php';
 
 use StylistCommerce\CMS\User;
+use StylistCommerce\CMS\UserDay;
 
 $user_id = $_GET['user_id'];
 
 $array_date_time = [];
 
-$user_day_time = User::action()->get_date_time($user_id);
+$user_day_time = UserDay::action()->get_date_time($user_id);
 
 $result_of_schedule = [];
 

@@ -4,8 +4,7 @@ declare(strict_types=1);                                 // Use strict types
 
 use StylistCommerce\CMS\Category;
 use StylistCommerce\CMS\User;
-
-
+use StylistCommerce\CMS\UserCategory;
 
 if (!$identifier) {                                                // If no valid id
  include APP_ROOT . '/src/pages/page-not-found.php';    // Page not found
@@ -23,7 +22,7 @@ if (!$category) {                                          // If category is emp
 
 $id = $category['id'];
 
-$users = User::action()->get_all(true, $id);
+$users = UserCategory::action()->get_all(true, $id);
 
 
 if (!$users) {  // if no users in the category that is published and not suspended then redirect to home page
@@ -33,7 +32,7 @@ if (!$users) {  // if no users in the category that is published and not suspend
 
 // getting each user with all his categories
 foreach ($users as $user) {
- $users_infos[] =  User::action()->get_all(true, null, $user['id']);
+ $users_infos[] =  UserCategory::action()->get_all(true, null, $user['id']);
 }
 
 // $categories = Category::action()->getAll();

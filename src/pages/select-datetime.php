@@ -5,6 +5,9 @@ declare(strict_types=1);                                 // Use strict types
 
 use StylistCommerce\CMS\ServiceCreated;
 use StylistCommerce\CMS\User;
+use StylistCommerce\CMS\UserDay;
+
+
 
 
 
@@ -12,6 +15,14 @@ if (!$identifier) {                                                // If no vali
  include APP_ROOT . '/src/pages/page-not-found.php';    // Page not found
  die;
 }
+if (isset($_SESSION['role'])) {
+ if ($_SESSION['role'] == 'stylist') {
+  $_SESSION['failure'] = 'Sorry you cannot access this page and take a rendez vous if you are still logged in as a stylist';
+  redirect('stylist/' . $identifier);
+ }
+}
+
+
 $user = User::action()->get_by_url_address($identifier);
 
 if (!$user) {                                          // If user is empty
@@ -53,7 +64,7 @@ if (isset($_SESSION["valid_date_time_{$user['id']}"])) { // if date has already 
 
 //check if stylist has already made his scheduled date
 
-$user_day_time = User::action()->get_date_time($user['id']);
+$user_day_time = UserDay::action()->get_date_time($user['id']);
 
 // echo '<pre>';
 // var_dump($user_day_time);

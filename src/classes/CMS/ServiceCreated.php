@@ -62,9 +62,11 @@ class ServiceCreated extends CMS {
 
 
 
-        public function get_all($published = true, $user = null, $limit = 10000) {
+        public function get_all($published = true, $user = null, $category = null, $limit = 10000) {
                 $arguments['user'] = $user;             // User id
                 $arguments['user1'] = $user;             // User id
+                $arguments['category']  = $category;             // Category id
+                $arguments['category1'] = $category;             // Category id
                 $arguments['limit']     = $limit;                // Max articles to return
 
 
@@ -75,7 +77,8 @@ class ServiceCreated extends CMS {
                   JOIN user AS u ON sc.user_id = u.id
                   JOIN category AS c ON sc.category_id = c.id
                   
-          WHERE (sc.user_id = :user OR :user1 is null) ";
+                WHERE (sc.user_id = :user OR :user1 is null)
+                AND (sc.category_id = :category OR :category1 is null) ";
 
                 if ($published) {                                // If must be published
                         $sql .= "AND u.published = 1 ";              // Add clause to SQL

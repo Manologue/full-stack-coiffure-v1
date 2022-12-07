@@ -18,9 +18,9 @@ if ($parts[0] == 'admin' || $parts[0] == 'account') {
  if ($parts[0] == 'account') {
   $page = 'account/' . ($parts[1] ?? '');
   $identifier   = $parts[2] ?? null;
-  if ($identifier == null) {  // never enter account with no identifier
-   $page = 'error';
-  }
+  // if ($identifier == null) {  // never enter account with no identifier
+  //  $page = 'error';
+  // }
  }
 } else {
  $page = $parts[0] ?: 'index';

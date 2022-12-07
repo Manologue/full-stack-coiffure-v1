@@ -36,14 +36,25 @@
    <!-- links -->
    <ul class="links">
     <!-- mon experience coiffure -->
-    <li>
-     <a class="btn btn-coiffe" href="<?= DOC_ROOT ?>login">Se Connecter</a>
-    </li>
-    <li>
-     <a class="btn btn-coiffe btn-stylist" href="<?= DOC_ROOT ?>register">devenir coiffeur a domicile</a>
-    </li>
+    <?php if (isset($_SESSION['role'])) { ?>
+     <li>
+      <a class="btn btn-coiffe" href="<?= DOC_ROOT ?>login">Profile</a>
+     </li>
+     <li>
+      <a class="btn btn-coiffe" href="<?= DOC_ROOT ?>logout">Logout</a>
+     </li>
+    <?php } else { ?>
+     <li>
+      <a class="btn btn-coiffe" href="<?= DOC_ROOT ?>login">Se Connecter</a>
+     </li>
+     <li>
+      <a class="btn btn-coiffe btn-stylist" href="<?= DOC_ROOT ?>register">devenir coiffeur a domicile</a>
+     </li>
+    <?php } ?>
    </ul>
-   <a class="collaborator-link" href="<?= DOC_ROOT ?>register">devenir coiffeur a domicile</a>
+   <?php if (!isset($_SESSION['role'])) { ?>
+    <a class="collaborator-link" href="<?= DOC_ROOT ?>register">devenir coiffeur a domicile</a>
+   <?php } ?>
   </nav>
   <!-- sidebar -->
   <aside class="sidebar">
@@ -51,12 +62,21 @@
 
    <!-- links -->
    <ul class="links">
-    <li>
-     <a href="<?= DOC_ROOT ?>login">Se Connecter</a>
-    </li>
-    <li>
-     <a href="<?= DOC_ROOT ?>register">devenir coiffeur a domicile</a>
-    </li>
+    <?php if (isset($_SESSION['role'])) { ?>
+     <li>
+      <a href="<?= DOC_ROOT ?>login">Profile</a>
+     </li>
+     <li>
+      <a href="<?= DOC_ROOT ?>logout">Logout</a>
+     </li>
+    <?php } else { ?>
+     <li>
+      <a href="<?= DOC_ROOT ?>login">Se Connecter</a>
+     </li>
+     <li>
+      <a href="<?= DOC_ROOT ?>register">devenir coiffeur a domicile</a>
+     </li>
+    <?php } ?>
    </ul>
   </aside>
  </header>

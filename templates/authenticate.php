@@ -28,9 +28,9 @@
       <small class="form-alert"><?= $errors['adress'] ?></small>
      </div>
      <div class="form-row">
-      <label for="postal_code" class="form-label">Code postal</label>
-      <input type="text" name="postal_code" id="postal_code" class="form-input" value="<?= html_escape($booking['postal_code'])  ?>" />
-      <small class="form-alert"><?= $errors['postal_code'] ?></small>
+      <label for="zip_code" class="form-label">Code postal</label>
+      <input type="text" name="zip_code" id="zip_code" class="form-input" value="<?= html_escape($booking['zip_code'])  ?>" />
+      <small class="form-alert"><?= $errors['zip_code'] ?></small>
      </div>
      <div class="form-row">
       <label for="tel" class="form-label">Tel</label>

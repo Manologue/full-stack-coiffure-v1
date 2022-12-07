@@ -8,7 +8,7 @@ $user = [                                                 // Initialize user arr
  'name' => '',
  'first_name'       => '',
  'adress'     => '',
- 'postal_code'     => '',
+ 'zip_code'     => '',
  'tel'     => '',
  'email'     => '',
  'password'     => '',
@@ -19,7 +19,7 @@ $errors = [                             // Initialize errors array
  'name' => '',
  'first_name'       => '',
  'adress'     => '',
- 'postal_code'     => '',
+ 'zip_code'     => '',
  'tel'     => '',
  'email'     => '',
  'password'     => '',
@@ -33,7 +33,7 @@ if (isset($_POST['register'])) {
  $user['name'] = $_POST['name'];
  $user['first_name'] = $_POST['first_name'];
  $user['adress'] = $_POST['adress'];
- $user['postal_code'] = $_POST['postal_code'];
+ $user['zip_code'] = $_POST['zip_code'];
  $user['tel'] = $_POST['tel'];
  $user['email'] = $_POST['email'];
  $user['password'] = $_POST['password'];
@@ -74,6 +74,7 @@ if (isset($_POST['register'])) {
    $errors['email'] = 'Email address already used'; // Store a warning
    $errors['warning'] = 'Please correct form error';
   } else {                                             // Otherwise send to login
+   $_SESSION = [];
    redirect('login/', ['success' => 'Thanks for joining! Please log in.']);
   }
  }

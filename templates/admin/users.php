@@ -56,7 +56,7 @@
         <th>Joined</th>
         <th>Tel</th>
         <th>Price Starter</th>
-        <th>Postal code</th>
+        <th>Zip code</th>
         <th>Edit User</th>
         <th class="text-center">User Profile</th>
        </tr>
@@ -87,7 +87,7 @@
          <td><?= html_escape($user['joined']) ?></td>
          <td><?= html_escape($user['tel']) ?></td>
          <td><?= html_escape($user['price_starter']) ?></td>
-         <td><?= html_escape($user['postal_code']) ?></td>
+         <td><?= html_escape($user['zip_code']) ?></td>
          <td><a data-bs-toggle='modal' data-bs-target='#edit-modal' class="edit-btn" data-id="<?= html_escape($user['id']) ?>" href="">Edit</a></td>
          <td class="table-action text-center">
           <a href="<?= DOC_ROOT ?>stylist_profile/<?= html_escape($user['url_address']) ?>" class="action-icon"> <i class="dripicons-preview"></i></a>

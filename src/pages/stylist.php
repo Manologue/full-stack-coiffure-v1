@@ -17,8 +17,9 @@ declare(strict_types=1);                                 // Use strict types
 
 use StylistCommerce\CMS\ServiceCreated;
 use StylistCommerce\CMS\User;
+use StylistCommerce\CMS\UserGallery;
 
-
+$failure  = isset($_SESSION['failure']) ? $_SESSION['failure'] : null;
 
 if (!$identifier) {                                                // If no valid id
  include APP_ROOT . '/src/pages/page-not-found.php';    // Page not found
@@ -33,7 +34,7 @@ if (!$user) {                                          // If user is empty
 
 $id = $user['id'];   // user id
 
-$gallery = User::action()->get_gallery($id);
+$gallery = UserGallery::action()->get_gallery($id);
 
 
 $services = ServiceCreated::action()->get_all(true, $id);  // get all user services

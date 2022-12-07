@@ -4,6 +4,7 @@
 <main id="stylist-page">
  <div class="section-center">
   <!-- alert -->
+  <?php if ($failure) { ?><div class="alert alert-danger"><?= $failure ?></div><?php } ?>
   <?php include('includes/alert-cart.php') ?>
   <!-- end of alert -->
 

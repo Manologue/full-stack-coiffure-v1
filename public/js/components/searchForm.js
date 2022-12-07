@@ -10,6 +10,7 @@ if (homeForm) {
   const locationInput = homeForm.querySelector('#location-input')
   const servicesInput = homeForm.querySelector('#services-input')
   const dateInput = homeForm.querySelector('#search-day')
+
   // some date input configurations
   // // Use Javascript
   var today = new Date()
@@ -53,15 +54,6 @@ if (homeForm) {
   locationInput.value = sessionStorage.getItem('location')
   servicesInput.value = sessionStorage.getItem('services')
   dateInput.value = sessionStorage.getItem('date')
-
-  // let calendar = flatpickr('#search-day', {
-  //   altInput: true,
-  //   altFormat: 'F j, Y',
-  //   dateFormat: 'Y-m-d',
-  //   minDate: 'today',
-  //   value: dateInput.value,
-  //   locale: 'de', // locale for this instance only
-  // })
 
   const inputs = homeForm.querySelectorAll('.field input')
   inputs.forEach((input) => {

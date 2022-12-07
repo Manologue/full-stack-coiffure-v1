@@ -12,7 +12,7 @@ if (Session::action()->role == 'admin') {             // If user is already logg
  exit;                                                // Stop code running
 }
 if (Session::action()->role !== 'admin' && Session::action()->role !== 'public') {             // If user is already logged in
- redirect('account/index/' . Session::action()->url_address);        // Redirect to their page
+ redirect('account/index');        // Redirect to their page
  exit;                                                // Stop code running
 }
 
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {              // If form submitted
   } elseif ($user) {                                   // Otherwise for members
    Session::action()->create($user);               // Create session
    if ($user['role'] !== 'admin') {
-    redirect('account/index/' . $user['url_address']);               // Redirect to their page
+    redirect('account/index/');               // Redirect to their page
    } else {
     redirect('admin/index');
    }

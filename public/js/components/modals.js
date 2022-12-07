@@ -27,7 +27,56 @@ function limit(string = '', limit = 0) {
   return string.substring(0, limit)
 }
 
+import suggestions from './suggestionsLocation.js'
+
 if (modalOverlay) {
+  /** global function(s) */
+
+  function suggestionsSearchLocation() {
+    const searchInput = modalLocation.querySelector('#name')
+    let slash
+    if (document.querySelector('main#home')) {
+      slash = '../'
+    } else {
+      slash = '../../'
+    }
+    searchInput.addEventListener('keyup', async (e) => {
+      let value = e.target.value
+      if (value !== '') {
+        modalLocation.querySelector('.research').style.display = 'none'
+        let results = await suggestions(value, slash)
+        // console.log(results)
+        let list = []
+        if (results.length > 0) {
+          results
+            .map((result) => {
+              let { name, state } = result
+              list += `
+            <span data-location="${name} ${state}">
+            <i class="fa-solid fa-location-dot"></i>${name} ${state}</span>
+            `
+            })
+            .join('')
+          locationList.innerHTML = `
+            <div class="list">
+            ${list}
+            </div>
+            `
+        } else {
+          locationList.innerHTML = `
+          <p class="error">
+          We couldn't find any matches. Try checking the spelling and search
+          again.
+        </p>
+              `
+        }
+      } else {
+        locationList.innerHTML = ``
+        modalLocation.querySelector('.research').style.display = 'block'
+      }
+    })
+  }
+
   const locationList = modalLocation.querySelector('.list')
   const serviceList = modalServices.querySelector('.list')
   const services = [...serviceList.querySelectorAll('input')]
@@ -39,6 +88,7 @@ if (modalOverlay) {
     })
     inputLocation.addEventListener('click', () => {
       modalLocation.classList.add('show')
+      suggestionsSearchLocation()
     })
 
     /*** for input date */
@@ -65,8 +115,8 @@ if (modalOverlay) {
         let location = e.target.dataset.location
         // console.log(location)
 
-        if (location.length > 25) {
-          location = limit(location, 25).concat('...')
+        if (location.length > 20) {
+          location = limit(location, 20).concat('...')
         }
         inputLocation.value = location
         sessionStorage.setItem('location', location)
@@ -170,6 +220,7 @@ if (modalOverlay) {
     destinationBtn.addEventListener('click', (e) => {
       e.preventDefault()
       modalLocation.classList.add('show')
+      suggestionsSearchLocation()
     })
 
     const checkLocation = async (chosenLocation, user_id, _slashes) => {

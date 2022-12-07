@@ -22,7 +22,7 @@
           </div>
           <div class="about-container">
             <span class="name"><?= html_escape($user['username']) ?></span>
-            <p class="city"><?= html_escape($user['city']) ?>, <?= html_escape($user['state']) ?></p>
+            <p class="city"><?= html_escape($user['city_of_work']) ?>, <?= html_escape($user['state']) ?></p>
             <p class="experience"><span>experience</span>depuis <?= html_escape($user['years_exp']) ?> ans</p>
             <p class="price">a partir de <span><?= html_escape($user['price_starter']) ?>$</span></p>
           </div>

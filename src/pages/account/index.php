@@ -1,7 +1,11 @@
 <?php
 
+use StylistCommerce\CMS\Session;
 
 
+
+
+is_stylist(Session::action()->role);                                // Check if stylist
 
 
 

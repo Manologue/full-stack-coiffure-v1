@@ -73,13 +73,25 @@ class Booking extends CMS {
             }
         }
     }
+    public function delete_report($booking_id) {
+        try {
+            Database::table("booking_report")->delete()->where("booking_id = :booking_id", ["booking_id" => $booking_id]);
+            return true;                                 // It worked, return true
+        } catch (\PDOException $e) {
+            if ($e->errorInfo[1] === 1451) {             // If integrity constraint
+                return false;                            // Return false
+            } else {                                     // If any other exception
+                throw $e;                                // Re-throw exception
+            }
+        }
+    }
 
     public function get_all($published = true, $user = null) {
         $arguments['user'] = $user;             // User id
         $arguments['user1'] = $user;             // User id
 
         $sql = "SELECT b.id, u.id as user_id, u.first_name, u.name, u.picture,
-  b.amount, b.status, b.currency, b.tel, b.name, b.adress
+  b.amount, b.status, b.currency, b.tel, b.name, b.adress, b.zip_code, b.description, b.date_time, b.location, b.email, b.created_at
   FROM booking AS b
       JOIN user AS u ON b.user_id = u.id
   WHERE (b.user_id = :user OR :user1 is null) ";

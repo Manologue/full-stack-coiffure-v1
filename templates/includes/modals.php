@@ -10,18 +10,18 @@
         <i class="fa-solid fa-location-dot"></i> Ou est-ce que le coiffeur doit
         venir</span>
       <div class="form-row">
-        <input type="text" placeholder="entrer votre address..." id="name" class="form-input" />
+        <input type="text" placeholder="entrer votre address..." id="name" class="form-input" autocomplete="off" />
       </div>
 
       <div class="results">
-        <p class="error">
+        <!-- <p class="error">
           We couldn't find any matches. Try checking the spelling and searching
           again.
-        </p>
-        <span><i class="fa-solid fa-earth-europe"></i> Rechercher des coiffeurs pres de
+        </p> -->
+        <span class="research"><i class="fa-solid fa-earth-europe"></i> Rechercher des coiffeurs pres de
           chez vous</span>
         <div class="list">
-          <span data-location="newyork">
+          <!-- <span data-location="newyork">
             <i class="fa-solid fa-location-dot"></i> newyork</span>
           <span data-location="toronto">
             <i class="fa-solid fa-location-dot"></i> toronto</span>
@@ -31,6 +31,7 @@
             <i class="fa-solid fa-location-dot"></i> Moromo</span>
           <span data-location="venir10">
             <i class="fa-solid fa-location-dot"></i> venir10</span>
+        </div> -->
         </div>
       </div>
     </div>

@@ -4,11 +4,7 @@
 include '../../bootstrap.php';
 
 use StylistCommerce\CMS\User;
-
-
-
-
-
+use StylistCommerce\CMS\UserDay;
 
 if (isset($_GET['user_id'])) {
 
@@ -16,7 +12,7 @@ if (isset($_GET['user_id'])) {
 
  $array_date_time = [];
 
- $user_day_time = User::action()->get_date_time($user_id);
+ $user_day_time = UserDay::action()->get_date_time($user_id, null, true, false);
 
  $result_of_schedule = [];
 
@@ -77,15 +73,18 @@ if (isset($_GET['user_id'])) {
    $result_of_schedule[] = [];
   }
  }
- // echo '<pre>';
- // var_dump($result_of_schedule);
- // echo '</pre>';
- // die;
+
  $today = date('w'); // day of week;
 
- $today = $today - 1;
+ if ($today !== 0) {
+  $today = $today - 1;
+ } else {
+  $today = 6;
+ }
+
 
  $final_result = [];
+
 
  for ($i = 0; $i < 7; $i++) {
 
